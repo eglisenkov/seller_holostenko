@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Первый Бит - Решения для автоматизации</title>
+    <style>
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  --color-success-rgb: 33, 128, 141;
+  --color-error-rgb: 192, 21, 47;
+  --color-warning-rgb: 168, 75, 47;
+  --color-info-rgb: 98, 108, 113;
+
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-base);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: var(--line-height-normal);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header Styles */
+.header {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-teal-700) 100%);
+    color: var(--color-white);
+    padding: var(--space-32) var(--space-24);
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+}
+
+.header h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-8);
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+.header p {
+    font-size: var(--font-size-lg);
+    opacity: 0.95;
+    font-weight: var(--font-weight-normal);
+    margin: 0;
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-32) var(--space-24);
+}
+
+/* Position Selector Section */
+.selector-section {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-32);
+    margin-bottom: var(--space-32);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-card-border);
+}
+
+.selector-section h2 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-24);
+    color: var(--color-text);
+    text-align: center;
+}
+
+.filters-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-16);
+    align-items: flex-end;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 250px;
+}
+
+.filter-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin-bottom: var(--space-8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.results-counter {
+    text-align: center;
+    margin-top: var(--space-20);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: var(--space-16) var(--space-16);
+    font-size: var(--font-size-lg);
+    line-height: 1.5;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-base);
+    transition: all var(--duration-normal) var(--ease-standard);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: var(--select-caret-light);
+    background-repeat: no-repeat;
+    background-position: right var(--space-16) center;
+    background-size: 20px;
+    padding-right: var(--space-32);
+    cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+    .form-control {
+        background-image: var(--select-caret-dark);
+    }
+}
+
+.form-control:hover {
+    border-color: var(--color-primary);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
+}
+
+/* Reset Button */
+.reset-btn {
+    display: inline-block;
+    margin-top: var(--space-16);
+    padding: var(--space-12) var(--space-24);
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.reset-btn:hover {
+    background-color: var(--color-secondary-hover);
+    transform: translateY(-1px);
+}
+
+.reset-btn:active {
+    background-color: var(--color-secondary-active);
+    transform: translateY(0);
+}
+
+/* Products Section */
+.products-section {
+    margin-top: var(--space-32);
+}
+
+/* Product Grid */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-24);
+}
+
+/* Product Card */
+.product-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    border: 1px solid var(--color-card-border);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--duration-normal) var(--ease-standard);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.product-card.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+}
+
+.product-header {
+    margin-bottom: var(--space-16);
+}
+
+.product-name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin-bottom: var(--space-8);
+    line-height: var(--line-height-tight);
+}
+
+.business-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    margin-bottom: var(--space-16);
+}
+
+.business-tag {
+    display: inline-block;
+    padding: var(--space-4) var(--space-10);
+    background-color: var(--color-bg-1);
+    color: var(--color-primary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    border: 1px solid rgba(var(--color-teal-500-rgb), 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .business-tag {
+        border-color: rgba(var(--color-teal-300-rgb), 0.3);
+    }
+}
+
+.product-description {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-16);
+    line-height: 1.6;
+}
+
+.product-features {
+    margin-bottom: var(--space-16);
+}
+
+.product-features h4 {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin-bottom: var(--space-8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.product-features ul {
+    list-style: none;
+    padding: 0;
+}
+
+.product-features li {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+    padding-left: var(--space-20);
+    position: relative;
+}
+
+.product-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-success);
+    font-weight: var(--font-weight-bold);
+}
+
+.product-utp {
+    background-color: var(--color-bg-3);
+    border-left: 3px solid var(--color-success);
+    padding: var(--space-12);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    line-height: 1.5;
+}
+
+.product-utp strong {
+    display: block;
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-4);
+    color: var(--color-success);
+}
+
+/* Questions Section */
+.questions-tab {
+    margin-top: var(--space-16);
+    border-top: 1px solid var(--color-card-border-inner);
+    padding-top: var(--space-16);
+}
+
+.questions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: var(--space-8);
+    background-color: var(--color-secondary);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--duration-fast) var(--ease-standard);
+}
+
+.questions-header:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+.questions-header h4 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin: 0;
+}
+
+.questions-toggle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.questions-toggle.expanded {
+    transform: rotate(180deg);
+}
+
+.questions-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--duration-normal) var(--ease-standard);
+}
+
+.questions-content.expanded {
+    max-height: 1000px;
+}
+
+.questions-section {
+    margin-top: var(--space-16);
+}
+
+.questions-section h5 {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    margin-bottom: var(--space-8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.questions-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--space-16);
+}
+
+.questions-list li {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-6);
+    padding-left: var(--space-20);
+    position: relative;
+    line-height: 1.6;
+}
+
+.questions-list li::before {
+    content: "?";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-32) var(--space-24);
+    text-align: center;
+    margin-top: var(--space-32);
+}
+
+.footer p {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-8);
+}
+
+.footer a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer a:hover {
+    color: var(--color-primary-hover);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: var(--font-size-3xl);
+    }
+
+    .header p {
+        font-size: var(--font-size-base);
+    }
+
+    .selector-section {
+        padding: var(--space-24);
+    }
+
+    .filters-wrapper {
+        flex-direction: column;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .reset-btn {
+        width: 100%;
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        padding: var(--space-24) var(--space-16);
+    }
+}
+
+/* Animation delays for staggered effect */
+.product-card:nth-child(1) { transition-delay: 0ms; }
+.product-card:nth-child(2) { transition-delay: 50ms; }
+.product-card:nth-child(3) { transition-delay: 100ms; }
+.product-card:nth-child(4) { transition-delay: 150ms; }
+.product-card:nth-child(5) { transition-delay: 200ms; }
+.product-card:nth-child(6) { transition-delay: 250ms; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Первый Бит</h1>
+        <p>Найдите решение для вашего бизнеса</p>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Filters Section -->
+        <section class="selector-section">
+            <h2>Найдите решение для вашего бизнеса</h2>
+            <div class="filters-wrapper">
+                <div class="filter-group">
+                    <label for="sizeSelect" class="filter-label">Размер компании:</label>
+                    <select id="sizeSelect" class="form-control">
+                        <option value="">Все размеры</option>
+                        <option value="Малый бизнес">Малый бизнес</option>
+                        <option value="Средний бизнес">Средний бизнес</option>
+                        <option value="Крупный бизнес">Крупный бизнес</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="positionSelect" class="filter-label">Должность:</label>
+                    <select id="positionSelect" class="form-control">
+                        <option value="">Выбрать должность...</option>
+                    </select>
+                </div>
+                <button id="resetBtn" class="reset-btn">↻ Сбросить фильтры</button>
+            </div>
+            <div id="resultsCounter" class="results-counter"></div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="productsSection" class="products-section">
+            <div id="productsGrid" class="products-grid"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Первый Бит - партнер 1С</p>
+        <p>Комплексная автоматизация бизнеса | <a href="https://1bit.ru" target="_blank">1bit.ru</a></p>
+    </footer>
+
+    <script>
+        // Application Data
+        const positions = [
+            "Руководитель по охране труда",
+            "Главный технолог",
+            "Руководитель по логистике",
+            "Директор по производству",
+            "Финансовый директор",
+            "Коммерческий директор",
+            "Бухгалтер",
+            "IT-директор",
+            "Операционный директор",
+            "Директор по маркетингу",
+            "Технический директор"
+        ];
+
+        const positionProducts = {
+            "Руководитель по охране труда": ["1С:ТОИР", "БИТ.СИЗ", "1С:Документооборот"],
+            "Главный технолог": ["1С:ТОИР", "1С:ERP", "БИТ.Строительство"],
+            "Руководитель по логистике": ["1С:ERP", "WMS/Cleverence", "1С Управление автотранспортом"],
+            "Директор по производству": ["1С:ТОИР", "1С:ERP", "БИТ.Строительство", "АПК"],
+            "Финансовый директор": ["1С:ERP", "PIX BI", "1С:Документооборот"],
+            "Коммерческий директор": ["1С:ERP", "Битрикс24", "PIX BI", "Imprice"],
+            "Бухгалтер": ["1С:ЗУП", "1С:ERP", "1С:Документооборот"],
+            "IT-директор": ["1С:ITILIUM", "PIX RPA", "1С:MDM", "Управление данными и ИИ"],
+            "Операционный директор": ["1С:ERP", "PIX BI", "PIX RPA", "1С:Документооборот"],
+            "Директор по маркетингу": ["Битрикс24", "PIX BI", "Imprice"],
+            "Технический директор": ["1С:ТОИР", "1С:ERP", "1С:ITILIUM", "PIX RPA"]
+        };
+
+        const productsData = {
+            "1С:ERP": {
+                open_questions: [
+                    "Сколько подразделений в вашей компании и как они взаимодействуют?",
+                    "Какие проблемы возникают при планировании производства?",
+                    "Как вы контролируете себестоимость продукции?",
+                    "Насколько оперативно вы получаете финансовую отчетность?"
+                ],
+                alternative_questions: [
+                    "Нужно ли интегрировать систему с текущими процессами?",
+                    "Какие модули критичны для вашего бизнеса?",
+                    "Требуется ли локальное или облачное развертывание?"
+                ],
+                closed_questions: [
+                    "Используете ли вы 1С сейчас?",
+                    "Нужна ли многопользовательская система?"
+                ]
+            },
+            "1С:MDM": {
+                open_questions: [
+                    "Как вы обеспечиваете единство справочников между филиалами?",
+                    "Сколько времени тратится на сверку данных между системами?",
+                    "Какие системы используются в холдинге и как они интегрированы?",
+                    "Какова структура данных в вашей компании?"
+                ],
+                alternative_questions: [
+                    "Используется ли облачное или локальное хранилище?",
+                    "Какой уровень централизации справочников требуется?",
+                    "Нужна ли синхронизация данных в реальном времени?"
+                ],
+                closed_questions: [
+                    "Возникают ли проблемы с дублированием данных?",
+                    "Контролируется ли качество вводимой информации?"
+                ]
+            },
+            "1С:ЗУП": {
+                open_questions: [
+                    "Сколько сотрудников в компании и какие системы оплаты используются?",
+                    "Как часто возникают ошибки при расчете зарплаты?",
+                    "Сколько времени тратится на формирование отчетности?",
+                    "Как ведется учет больничных, отпусков и командировок?"
+                ],
+                alternative_questions: [
+                    "Нужны ли расчеты в нескольких валютах?",
+                    "Требуется ли интеграция с порталом работника?",
+                    "Какой уровень автоматизации нужен?"
+                ],
+                closed_questions: [
+                    "Используете ли электронные трудовые книжки?",
+                    "Соответствуете ли текущему законодательству?"
+                ]
+            },
+            "1С:ТОИР": {
+                open_questions: [
+                    "Сколько единиц оборудования на предприятии?",
+                    "Как планируются ремонты и закупка запчастей?",
+                    "Отслеживаете ли показатели работы оборудования?",
+                    "Как контролируются затраты на обслуживание?"
+                ],
+                alternative_questions: [
+                    "Используются ли системы предиктивного обслуживания?",
+                    "Какой тип оборудования требует отслеживания?",
+                    "Нужна ли мобильная регистрация работ?"
+                ],
+                closed_questions: [
+                    "Как часто происходят незапланированные простои?",
+                    "Ведется ли учет материалов по оборудованию?"
+                ]
+            },
+            "Битрикс24": {
+                open_questions: [
+                    "Как ведется учет клиентов и сделок?",
+                    "Как сотрудники взаимодействуют между собой?",
+                    "Какие вызовы возникают в управлении продажами?",
+                    "Как организована командная работа?"
+                ],
+                alternative_questions: [
+                    "Нужна ли омниканальность для контакт-центра?",
+                    "Требуется ли портал для клиентов?",
+                    "Какой тип CRM подходит вашему бизнесу?"
+                ],
+                closed_questions: [
+                    "Теряются ли обращения из разных каналов?",
+                    "Используются ли автоматические воронки продаж?"
+                ]
+            },
+            "PIX BI": {
+                open_questions: [
+                    "Как долго собираются данные для управленческой отчетности?",
+                    "Из скольких систем нужно консолидировать информацию?",
+                    "Насколько оперативно руководство получает аналитику?",
+                    "Как визуализируются ключевые показатели бизнеса?"
+                ],
+                alternative_questions: [
+                    "Нужны ли предиктивные модели?",
+                    "Какой уровень детализации данных требуется?",
+                    "Требуется ли встраивание отчетов в портал?"
+                ],
+                closed_questions: [
+                    "Могут ли сотрудники самостоятельно строить отчеты?",
+                    "Есть ли потребность в экспорте данных?"
+                ]
+            },
+            "PIX RPA": {
+                open_questions: [
+                    "Какие рутинные операции отнимают время сотрудников?",
+                    "Сколько времени тратится на ручной ввод данных?",
+                    "Какие процессы можно стандартизировать?",
+                    "Работают ли сотрудники со множеством систем одновременно?"
+                ],
+                alternative_questions: [
+                    "Какой уровень сложности автоматизации требуется?",
+                    "Требуется ли управление процессами в очереди?",
+                    "Нужна ли интеграция с ИИ?"
+                ],
+                closed_questions: [
+                    "Как часто возникают ошибки при переносе информации?",
+                    "Видите ли вы возможность быстрой окупаемости?"
+                ]
+            },
+            "БИТ.СИЗ": {
+                open_questions: [
+                    "Сколько сотрудников должны получать СИЗ?",
+                    "Как контролируется выполнение норм выдачи?",
+                    "Как формируются заявки на закупку?",
+                    "Как хранятся данные о выдаче СИЗ?"
+                ],
+                alternative_questions: [
+                    "Нужна ли мобильная регистрация выдачи?",
+                    "Требуется ли интеграция с 1С?",
+                    "Какой формат отчетности нужен?"
+                ],
+                closed_questions: [
+                    "Возникают ли затоваривания или дефицит СИЗ?",
+                    "Ведутся ли личные карточки выдачи?"
+                ]
+            },
+            "1С Управление автотранспортом": {
+                open_questions: [
+                    "Сколько единиц техники в автопарке?",
+                    "Как ведется учет расхода топлива?",
+                    "Как планируются ремонты и ТО?",
+                    "Контролируется ли рентабельность каждого автомобиля?"
+                ],
+                alternative_questions: [
+                    "Нужна ли GPS диспетчеризация?",
+                    "Требуется ли мобильная приемка заказов?",
+                    "Какой уровень детализации по себестоимости?"
+                ],
+                closed_questions: [
+                    "Как рассчитывается стоимость услуг для клиентов?",
+                    "Используется ли учет ГСМ автоматически?"
+                ]
+            },
+            "WMS/Cleverence": {
+                open_questions: [
+                    "Какая площадь складских помещений?",
+                    "Как организовано хранение товаров?",
+                    "Сколько времени занимает сборка заказа?",
+                    "Как происходит учет товаров?"
+                ],
+                alternative_questions: [
+                    "Нужна ли мобильная автоматизация?",
+                    "Требуется ли оптимизация маршрутов?",
+                    "Какой уровень интеграции с ERP?"
+                ],
+                closed_questions: [
+                    "Как часто происходят пересортицы?",
+                    "Используются ли терминалы сбора данных?"
+                ]
+            },
+            "1С:Документооборот": {
+                open_questions: [
+                    "Как долго ищутся нужные документы?",
+                    "Как организовано согласование документов?",
+                    "Как контролируются сроки исполнения поручений?",
+                    "Как хранятся и защищаются документы?"
+                ],
+                alternative_questions: [
+                    "Требуется ли электронный обмен с контрагентами?",
+                    "Нужна ли интеграция с бухгалтерией?",
+                    "Какой формат хранения документов?"
+                ],
+                closed_questions: [
+                    "Используется ли электронный обмен с контрагентами?",
+                    "Нужна ли подпись в документообороте?"
+                ]
+            },
+            "Управление данными и ИИ": {
+                open_questions: [
+                    "Какой объем данных обрабатывается ежедневно?",
+                    "Используются ли данные для прогнозирования?",
+                    "Как сейчас принимаются решения на основе данных?",
+                    "Какие бизнес-процессы можно улучшить с помощью ИИ?"
+                ],
+                alternative_questions: [
+                    "Нужна ли интеграция с GPT-моделями?",
+                    "Требуется ли облачное или локальное решение?",
+                    "Какой уровень автоматизации анализа?"
+                ],
+                closed_questions: [
+                    "Есть ли потребность в автоматическом анализе данных?",
+                    "Рассматриваете ли внедрение ИИ в бизнес-процессы?"
+                ]
+            },
+            "1С:ITILIUM": {
+                open_questions: [
+                    "Как обрабатываются обращения пользователей?",
+                    "Сколько времени занимает решение типовых проблем?",
+                    "Как ведется учет оборудования и ПО?",
+                    "Как контролируются показатели качества сервиса?"
+                ],
+                alternative_questions: [
+                    "Нужна ли база знаний для пользователей?",
+                    "Требуется ли SLA управление?",
+                    "Какой тип обращений приоритизировать?"
+                ],
+                closed_questions: [
+                    "Контролируются ли сроки выполнения заявок?",
+                    "Есть ли база решений для типовых проблем?"
+                ]
+            },
+            "БИТ.Строительство": {
+                open_questions: [
+                    "Сколько объектов ведется одновременно?",
+                    "Как контролируются сроки и бюджеты?",
+                    "Как ведется учет материалов по объектам?",
+                    "Как организована работа с субподрядчиками?"
+                ],
+                alternative_questions: [
+                    "Нужна ли автоматическая сметообразование?",
+                    "Требуется ли интеграция с поставщиками?",
+                    "Какой формат планирования работ?"
+                ],
+                closed_questions: [
+                    "Формируются ли сметы автоматически?",
+                    "Нужен ли контроль по объектам?"
+                ]
+            },
+            "АПК": {
+                open_questions: [
+                    "Какие виды сельхоздеятельности ведутся?",
+                    "Как ведется учет поголовья и урожая?",
+                    "Как планируются сельхозработы?",
+                    "Ведется ли учет по полям и участкам?"
+                ],
+                alternative_questions: [
+                    "Требуется ли интеграция с приборами учета?",
+                    "Какой уровень детализации по посевам?",
+                    "Нужны ли прогнозы урожайности?"
+                ],
+                closed_questions: [
+                    "Контролируется ли себестоимость продукции?",
+                    "Используется ли ветеринарный контроль?"
+                ]
+            },
+            "Imprice": {
+                open_questions: [
+                    "Как часто меняются цены на товары?",
+                    "Как рассчитывается оптимальная цена?",
+                    "Какие факторы влияют на ценообразование?",
+                    "Какова стратегия ценообразования сейчас?"
+                ],
+                alternative_questions: [
+                    "Нужно ли учитывать сезонность?",
+                    "Требуется ли учет конкурентов?",
+                    "Какой канал продаж приоритизировать?"
+                ],
+                closed_questions: [
+                    "Отслеживаете ли цены конкурентов?",
+                    "Анализируете ли влияние цены на спрос?"
+                ]
+            }
+        };
+
+        const products = {
+            "1С:ERP": {
+                name: "1С:ERP Управление предприятием",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Комплексное управление предприятием: финансы, производство, логистика, продажи",
+                key_features: [
+                    "Автоматизация всех бизнес-процессов предприятия",
+                    "Планирование и управление производством",
+                    "Управление финансами и бюджетированием",
+                    "Аналитика и отчетность в реальном времени"
+                ],
+                utp: "Единая система управления всеми процессами предприятия с прозрачностью данных в режиме реального времени"
+            },
+            "1С:MDM": {
+                name: "1С:MDM Управление мастер-данными КОРП",
+                businesses: ["Крупный бизнес"],
+                description: "Управление корпоративными мастер-данными для крупных предприятий и холдингов",
+                key_features: [
+                    "Централизованное управление справочниками",
+                    "Контроль качества данных",
+                    "Интеграция с множеством информационных систем",
+                    "Гармонизация данных между подразделениями"
+                ],
+                utp: "Обеспечение единого информационного пространства холдинга с высоким качеством корпоративных данных"
+            },
+            "1С:ЗУП": {
+                name: "1С:Зарплата и управление персоналом",
+                businesses: ["Малый бизнес", "Средний бизнес", "Крупный бизнес"],
+                description: "Автоматизация кадрового учета, расчета зарплаты и управления персоналом",
+                key_features: [
+                    "Расчет заработной платы любой сложности",
+                    "Кадровый учет и электронные трудовые книжки",
+                    "Автоматизация начисления налогов и взносов",
+                    "Формирование отчетности в ФНС и фонды"
+                ],
+                utp: "Автоматизация всех процессов кадрового учета и расчета зарплаты с соблюдением законодательства"
+            },
+            "1С:ТОИР": {
+                name: "1С:ТОИР Управление ремонтами и обслуживанием оборудования",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Управление техническим обслуживанием и ремонтами оборудования",
+                key_features: [
+                    "Учет оборудования и нормативов",
+                    "Планирование ТО и ремонтов",
+                    "Управление нарядами и работами",
+                    "Контроль показателей эксплуатации"
+                ],
+                utp: "Снижение простоев оборудования и оптимизация затрат на ТОиР через системное планирование"
+            },
+            "Битрикс24": {
+                name: "Битрикс24",
+                businesses: ["Малый бизнес", "Средний бизнес", "Крупный бизнес"],
+                description: "Универсальная платформа для управления бизнесом и командной работы",
+                key_features: [
+                    "CRM для управления продажами",
+                    "Онлайн-офис и совместная работа",
+                    "Контакт-центр и омниканальность",
+                    "Управление задачами и проектами"
+                ],
+                utp: "Единое рабочее пространство с CRM, задачами и коммуникациями для эффективной работы команды"
+            },
+            "PIX BI": {
+                name: "PIX BI - Бизнес-аналитика",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Система бизнес-аналитики для визуализации данных и принятия решений",
+                key_features: [
+                    "Self-service аналитика без программистов",
+                    "Интерактивные дашборды",
+                    "Интеграция с множеством источников",
+                    "Сквозная фильтрация данных"
+                ],
+                utp: "Мгновенная визуализация данных из всех систем в понятных дашбордах для быстрых решений"
+            },
+            "PIX RPA": {
+                name: "PIX RPA - Роботизация процессов",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Программная автоматизация рутинных процессов с помощью роботов",
+                key_features: [
+                    "Автоматизация повторяющихся задач",
+                    "Работа 24/7 без ошибок",
+                    "Интеграция со 100+ системами",
+                    "Быстрая окупаемость проектов"
+                ],
+                utp: "Освобождение сотрудников от рутины и ускорение процессов в 3-4 раза с помощью роботов"
+            },
+            "БИТ.СИЗ": {
+                name: "БИТ.СИЗ - Охрана труда",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Управление средствами индивидуальной защиты и охраной труда",
+                key_features: [
+                    "Учет выдачи СИЗ сотрудникам",
+                    "Контроль норм выдачи",
+                    "Планирование закупок СИЗ",
+                    "Формирование документов для ФСС"
+                ],
+                utp: "100% обеспеченность работников СИЗ с контролем бюджета и соблюдением законодательства"
+            },
+            "1С Управление автотранспортом": {
+                name: "1С:Управление автотранспортом",
+                businesses: ["Малый бизнес", "Средний бизнес"],
+                description: "Комплексная автоматизация автотранспортных предприятий",
+                key_features: [
+                    "Диспетчеризация и путевые листы",
+                    "Учет ГСМ и запчастей",
+                    "Планирование ремонтов",
+                    "Расчет себестоимости перевозок"
+                ],
+                utp: "Полный контроль автопарка от заказов до рентабельности с оптимизацией затрат"
+            },
+            "WMS/Cleverence": {
+                name: "Складская логистика (WMS, Cleverence)",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Системы управления складом и мобильной автоматизации",
+                key_features: [
+                    "Адресное хранение товаров",
+                    "Мобильная приемка и отгрузка",
+                    "Оптимизация маршрутов сборщиков",
+                    "Контроль товарных остатков"
+                ],
+                utp: "Повышение точности складских операций и ускорение обработки заказов в 2-3 раза"
+            },
+            "1С:Документооборот": {
+                name: "1С:Документооборот",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Электронный документооборот и управление документами",
+                key_features: [
+                    "Электронный архив документов",
+                    "Маршруты согласования",
+                    "ЭДО с контрагентами",
+                    "Контроль исполнительской дисциплины"
+                ],
+                utp: "Ускорение документооборота и исключение потерь документов через электронный архив"
+            },
+            "Управление данными и ИИ": {
+                name: "Управление данными и искусственный интеллект",
+                businesses: ["Крупный бизнес"],
+                description: "Решения для работы с большими данными и применения ИИ",
+                key_features: [
+                    "Обработка больших объемов данных",
+                    "Машинное обучение",
+                    "Предиктивная аналитика",
+                    "Автоматизация принятия решений"
+                ],
+                utp: "Превращение данных в конкурентное преимущество через ИИ и предиктивную аналитику"
+            },
+            "1С:ITILIUM": {
+                name: "1С:ITILIUM - Service Desk",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Автоматизация управления ИТ-услугами и сервисными процессами",
+                key_features: [
+                    "Service Desk для обращений",
+                    "Управление инцидентами и проблемами",
+                    "Учет ИТ-активов",
+                    "SLA и контроль сроков"
+                ],
+                utp: "Повышение эффективности ИТ-службы через централизацию обращений и контроль качества сервиса"
+            },
+            "БИТ.Строительство": {
+                name: "БИТ.Строительство",
+                businesses: ["Малый бизнес", "Средний бизнес", "Крупный бизнес"],
+                description: "Комплексная автоматизация строительных компаний",
+                key_features: [
+                    "Управление строительными проектами",
+                    "Календарное планирование работ",
+                    "Смётное дело",
+                    "Контроль бюджетов объектов"
+                ],
+                utp: "Полный контроль строительных проектов от сметы до сдачи с прозрачностью затрат"
+            },
+            "АПК": {
+                name: "Сельское хозяйство (АПК)",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Отраслевые решения для агропромышленного комплекса",
+                key_features: [
+                    "Учет животноводства и растениеводства",
+                    "Управление земельными участками",
+                    "Планирование сельхозработ",
+                    "Учет урожайности"
+                ],
+                utp: "Специализированные решения с учетом отраслевой специфики АПК для повышения эффективности"
+            },
+            "Imprice": {
+                name: "Imprice - Динамическое ценообразование",
+                businesses: ["Средний бизнес", "Крупный бизнес"],
+                description: "Автоматизация ценообразования с использованием ИИ",
+                key_features: [
+                    "Динамическое изменение цен",
+                    "Мониторинг цен конкурентов",
+                    "Оптимизация маржинальности",
+                    "Учет эластичности спроса"
+                ],
+                utp: "Максимизация прибыли через умное ценообразование с учетом рынка и спроса в реальном времени"
+            }
+        };
+
+        // DOM Elements
+        const positionSelect = document.getElementById('positionSelect');
+        const sizeSelect = document.getElementById('sizeSelect');
+        const resetBtn = document.getElementById('resetBtn');
+        const productsSection = document.getElementById('productsSection');
+        const productsGrid = document.getElementById('productsGrid');
+        const resultsCounter = document.getElementById('resultsCounter');
+
+        // State
+        let allProducts = [];
+
+        // Get all unique product keys
+        function getAllProductKeys() {
+            const productKeys = new Set();
+            Object.values(positionProducts).forEach(products => {
+                products.forEach(key => productKeys.add(key));
+            });
+            return Array.from(productKeys);
+        }
+
+        // Initialize position select
+        function initPositionSelect() {
+            positions.forEach(position => {
+                const option = document.createElement('option');
+                option.value = position;
+                option.textContent = position;
+                positionSelect.appendChild(option);
+            });
+        }
+
+        // Filter and display products
+        function filterProducts() {
+            const selectedSize = sizeSelect.value;
+            const selectedPosition = positionSelect.value;
+
+            let filteredProducts = allProducts;
+
+            // Filter by company size
+            if (selectedSize) {
+                filteredProducts = filteredProducts.filter(productKey => {
+                    const product = products[productKey];
+                    return product && product.businesses.includes(selectedSize);
+                });
+            }
+
+            // Filter by position
+            if (selectedPosition) {
+                const positionProductsList = positionProducts[selectedPosition];
+                if (positionProductsList) {
+                    filteredProducts = filteredProducts.filter(key => 
+                        positionProductsList.includes(key)
+                    );
+                }
+            }
+
+            displayProducts(filteredProducts);
+        }
+
+        // Display products
+        function displayProducts(productList) {
+            // Clear previous products
+            productsGrid.innerHTML = '';
+
+            // Update counter
+            resultsCounter.textContent = `Найдено ${productList.length} решений`;
+
+            if (productList.length === 0) {
+                productsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--color-text-secondary); font-size: var(--font-size-lg); padding: var(--space-32);">Нет подходящих решений</p>';
+                return;
+            }
+
+            // Create product cards
+            productList.forEach((productKey, index) => {
+                const product = products[productKey];
+                if (!product) return;
+
+                const card = createProductCard(productKey, product);
+                productsGrid.appendChild(card);
+
+                // Animate card appearance
+                setTimeout(() => {
+                    card.classList.add('animate');
+                }, index * 50);
+            });
+        }
+
+        // Create product card element
+        function createProductCard(productKey, product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+
+            // Business tags
+            const tagsHTML = product.businesses
+                .map(business => `<span class="business-tag">${business}</span>`)
+                .join('');
+
+            // Features list
+            const featuresHTML = product.key_features
+                .map(feature => `<li>${feature}</li>`)
+                .join('');
+
+            const questions = productsData[productKey];
+            let questionsHTML = '';
+            
+            if (questions) {
+                const openQuestionsHTML = questions.open_questions
+                    .map(q => `<li>${q}</li>`).join('');
+                const altQuestionsHTML = questions.alternative_questions
+                    .map(q => `<li>${q}</li>`).join('');
+                const closedQuestionsHTML = questions.closed_questions
+                    .map(q => `<li>${q}</li>`).join('');
+                
+                const cardId = `questions-${productKey.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                questionsHTML = `
+                    <div class="questions-tab">
+                        <div class="questions-header" data-card-id="${cardId}">
+                            <h4>ВОПРОСЫ</h4>
+                            <span class="questions-toggle">▼</span>
+                        </div>
+                        <div class="questions-content">
+                            <div class="questions-section">
+                                <h5>Открытые вопросы</h5>
+                                <ul class="questions-list">${openQuestionsHTML}</ul>
+                            </div>
+                            <div class="questions-section">
+                                <h5>Альтернативные вопросы</h5>
+                                <ul class="questions-list">${altQuestionsHTML}</ul>
+                            </div>
+                            <div class="questions-section">
+                                <h5>Закрытые вопросы</h5>
+                                <ul class="questions-list">${closedQuestionsHTML}</ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="product-header">
+                    <h3 class="product-name">${product.name}</h3>
+                    <div class="business-tags">${tagsHTML}</div>
+                </div>
+                <p class="product-description">${product.description}</p>
+                <div class="product-features">
+                    <h4>Ключевые возможности:</h4>
+                    <ul>${featuresHTML}</ul>
+                </div>
+                <div class="product-utp">
+                    <strong>Уникальное преимущество:</strong>
+                    ${product.utp}
+                </div>
+                ${questionsHTML}
+            `;
+
+            // Add click event for questions toggle
+            setTimeout(() => {
+                const questionsHeader = card.querySelector('.questions-header');
+                if (questionsHeader) {
+                    questionsHeader.addEventListener('click', function() {
+                        const content = this.nextElementSibling;
+                        const toggle = this.querySelector('.questions-toggle');
+                        
+                        if (content.classList.contains('expanded')) {
+                            content.classList.remove('expanded');
+                            toggle.classList.remove('expanded');
+                        } else {
+                            content.classList.add('expanded');
+                            toggle.classList.add('expanded');
+                        }
+                    });
+                }
+            }, 0);
+
+            return card;
+        }
+
+        // Reset selection
+        function resetSelection() {
+            positionSelect.value = '';
+            sizeSelect.value = '';
+            filterProducts();
+        }
+
+        // Event Listeners
+        positionSelect.addEventListener('change', filterProducts);
+        sizeSelect.addEventListener('change', filterProducts);
+        resetBtn.addEventListener('click', resetSelection);
+
+        // Initialize on page load
+        function init() {
+            initPositionSelect();
+            allProducts = getAllProductKeys();
+            displayProducts(allProducts);
+        }
+
+        init();
+    </script>
+</body>
+</html>
